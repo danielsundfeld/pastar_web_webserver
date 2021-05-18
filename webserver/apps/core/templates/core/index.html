@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% load widget_tweaks %}
+
+{% block content %}
+    {% if not user.is_authenticated %}
+        <a class="btn btn-secondary nav-item nav-link active text-white" id="content" href="{% url 'ajuda' %}">
+            Ajuda
+        </a>
+    {% endif %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+            {#Uso Futuro#}
+        </div>
+        <div class="col-sm-6 text-center" >
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+            <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+                {{ form.manual_text|attr:"class:form-control" | attr:"rows:15" | attr:"cols:10" | attr:"wrap:off"}}
+                <br>
+                <p> Enviar Arquivo .fasta</p>
+                {{ form.file_data }}<br><br>
+
+                <button type="submit" class="btn btn-info">Enviar</button>
+            </form>
+        </p>
+        <div class="col-sm-3">
+            {# One of three columns#}
+        </div>
+      </div>
+    </div>
+{% endblock content %}
