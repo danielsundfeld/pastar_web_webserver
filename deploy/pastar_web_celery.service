@@ -1,0 +1,16 @@
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+Type=forking
+User=ubuntu
+Group=ubuntu
+RuntimeDirectory=celery
+WorkingDirectory=/home/ubuntu/pastar_web_webserver/webserver
+ExecStart=celery -A msa_astar.celeryconfig multi start worker -l INFO
+ExecStop=celery -A msa_astar.celeryconfig multi stop worker -l INFO
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

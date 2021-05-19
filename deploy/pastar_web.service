@@ -1,0 +1,18 @@
+[Unit]
+Description=uWSGI Emperor Msa Pastar
+After=syslog.target
+
+[Service]
+ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
+# Requires systemd version 211 or newer
+RuntimeDirectory=uwsgi
+User=ubuntu
+Group=ubuntu
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
