@@ -5,6 +5,9 @@ cd webserver
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
+deactivate
+#TODO fixup
+python3 -m pip install -r requirements.txt
 
 cd ../deploy
 sudo pip install uwsgi
