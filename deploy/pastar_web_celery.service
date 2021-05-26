@@ -7,6 +7,7 @@ Type=forking
 User=ubuntu
 Group=ubuntu
 RuntimeDirectory=celery
+EnvironmentFile=/home/ubuntu/pastar_web_webserver/webserver/.aws_keys
 WorkingDirectory=/home/ubuntu/pastar_web_webserver/webserver
 ExecStart=celery -A msa_astar.celeryconfig multi start worker -l INFO
 ExecStop=celery -A msa_astar.celeryconfig multi stop worker -l INFO

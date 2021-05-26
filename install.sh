@@ -1,4 +1,6 @@
-#Master
+#!/bin/bash
+AWS_KEY_FILE="/home/ubuntu/pastar_web_webserver/webserver/.aws_keys"
+
 sudo apt update
 sudo apt install -y build-essential python3-django python3-pip python3-venv libcurl4-openssl-dev libssl-dev python-celery-common nginx
 cd webserver
@@ -8,6 +10,22 @@ python3 -m pip install -r requirements.txt
 deactivate
 #TODO fixup
 python3 -m pip install -r requirements.txt
+
+echo "Please enter the AWS_ACCESS_KEY"
+read AWS_ACCESS_KEY_ID
+echo "Please enter the AWS_SECRET_ACCESS_KEY"
+read AWS_SECRET_ACCESS_KEY
+
+AWS_REGION=$(curl http://169.254.169.254/latest/meta-data/placement/region 2>/dev/null)
+echo "Installing for $AWS_REGION region"
+
+cat > $AWS_KEY_FILE <<EOL
+AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+AWS_REGION=$AWS_REGION
+EOL
+
+chmod 400 $AWS_KEY_FILE
 
 cd ../deploy
 sudo pip install uwsgi
@@ -31,5 +49,3 @@ sudo chown ubuntu:ubuntu /var/log/celery/
 sudo cp pastar_web_celery.service /etc/systemd/system/
 sudo systemctl enable pastar_web_celery
 sudo systemctl start pastar_web_celery
-
-echo Now fixup -AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, CELERY_BROKER_TRANSPORT_OPTIONS
