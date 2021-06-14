@@ -1,6 +1,7 @@
 #!/bin/bash
 INSTALL_DIR="/opt/pastar_web_webserver"
 AWS_KEY_FILE="$INSTALL_DIR/.aws_keys"
+cd $(dirname $0)
 
 sudo apt update
 sudo apt install -y build-essential python3-django python3-pip python3-venv libcurl4-openssl-dev libssl-dev python-celery-common nginx
