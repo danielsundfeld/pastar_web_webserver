@@ -1,15 +1,19 @@
 #!/bin/bash
-AWS_KEY_FILE="/home/ubuntu/pastar_web_webserver/webserver/.aws_keys"
+INSTALL_DIR="/opt/pastar_web_webserver"
+AWS_KEY_FILE="$INSTALL_DIR/.aws_keys"
 
 sudo apt update
 sudo apt install -y build-essential python3-django python3-pip python3-venv libcurl4-openssl-dev libssl-dev python-celery-common nginx
-cd webserver
+
+sudo cp -apv webserver $INSTALL_DIR
+cd $INSTALL_DIR
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
 deactivate
 #TODO fixup
 python3 -m pip install -r requirements.txt
+cd -
 
 echo "Please enter the AWS_ACCESS_KEY"
 read AWS_ACCESS_KEY_ID
@@ -27,7 +31,7 @@ EOL
 
 chmod 400 $AWS_KEY_FILE
 
-cd ../deploy
+cd ./deploy
 sudo pip install uwsgi
 sudo rm /etc/nginx/sites-enabled/default
 sudo cp pastar_web_nginx.conf /etc/nginx/sites-available/

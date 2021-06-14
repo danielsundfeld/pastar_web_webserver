@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
-EnvironmentFile=/home/ubuntu/pastar_web_webserver/webserver/.aws_keys
+EnvironmentFile=/opt/pastar_web_webserver/.aws_keys
 RuntimeDirectory=uwsgi
 User=ubuntu
 Group=ubuntu
