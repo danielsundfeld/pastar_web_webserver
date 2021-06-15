@@ -7,7 +7,7 @@ def handling_tasks(task_result):
     phase_two = task_result[4][30:39]
     similarity = task_result[6][11:18]
     result = [strip for strip in task_result[8:] if strip != '']
-    result = result[:-1]
+    result = result[:-4]
 
     return result, [phase_one, phase_two, similarity]
 
