@@ -1,6 +1,9 @@
 #!/bin/bash
 INSTALL_DIR="/opt/pastar_web_webserver"
 AWS_KEY_FILE="$INSTALL_DIR/.aws_keys"
+INSTALL_USER=ubuntu
+INSTALL_GROUP=ubuntu
+
 cd $(dirname $0)
 
 if [ "x$AWS_ACCESS_KEY_ID" = "x" ]; then
@@ -39,6 +42,8 @@ AWS_REGION=$AWS_REGION
 EOL
 
 chmod 400 $AWS_KEY_FILE
+
+sudo chown -R $INSTALL_USER:$INSTALL_GROUP $INSTALL_DIR
 
 cd ./deploy
 sudo pip install uwsgi
