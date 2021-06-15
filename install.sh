@@ -13,7 +13,7 @@ echo "Installing for $AWS_REGION region"
 echo "Install dir: $INSTALL_DIR"
 
 sudo apt update
-sudo apt install -y build-essential python3-django python3-pip python3-venv libcurl4-openssl-dev libssl-dev python-celery-common nginx
+sudo apt install -y build-essential python3-django python3-pip python3-venv libcurl4-openssl-dev libssl-dev nginx
 
 sudo cp -apv webserver $INSTALL_DIR
 cd $INSTALL_DIR
@@ -21,8 +21,6 @@ python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
 deactivate
-#TODO fixup
-python3 -m pip install -r requirements.txt
 cd -
 
 cat > $AWS_KEY_FILE <<EOL

@@ -9,8 +9,8 @@ Group=ubuntu
 RuntimeDirectory=celery
 EnvironmentFile=/opt/pastar_web_webserver/.aws_keys
 WorkingDirectory=/opt/pastar_web_webserver
-ExecStart=celery -A msa_astar.celeryconfig multi start worker -l INFO
-ExecStop=celery -A msa_astar.celeryconfig multi stop worker -l INFO
+ExecStart=/opt/pastar_web_webserver/venv/bin/celery -A msa_astar.celeryconfig multi start worker -l INFO
+ExecStop=/opt/pastar_web_webserver/venv/bin/celery -A msa_astar.celeryconfig multi stop worker -l INFO
 Restart=always
 
 [Install]
